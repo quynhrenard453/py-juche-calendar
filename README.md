@@ -37,3 +37,10 @@ The package exports four names:
 - `juche_to_gregorian(date)` — accepts a `JucheDate`, returns a `GregorianDate`.
 
 Both date classes also provide `.to_juche()` and `.to_gregorian()` methods that do the same work without the type check.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
